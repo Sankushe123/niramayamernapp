@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: niramaya-apis
+    env: node
+    buildCommand: npm install
+    startCommand: node index.js
+    plan: free
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://sankushe05:QmQy82Ejh81At6OP@niramay-apis.iu7zuvl.mongodb.net/?retryWrites=true&w=majority&appName=niramay-apis
+      - key: PORT
+        value: 5000
+      - key: EMAIL_USER
+        value: shubhamankushe93@gmail.com
+      - key: EMAIL_PASS
+        value: wfotrdbwwegntocx
+      - key: ADMIN_EMAIL
+        value: sankushe05@gmail.com
+      
