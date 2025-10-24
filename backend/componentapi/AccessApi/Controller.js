@@ -1,4 +1,5 @@
-const RoleAccess = require('./model');
+const mongoose = require('mongoose');
+const RoleAccess = require('./Model');
 
 // GET /api/roleaccess?role=Admin
 const getAccessByRole = async (req, res) => {
