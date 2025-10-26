@@ -11,7 +11,7 @@ const reviewRoutes = require("./componentapi/ReviewsManagement/Routes");
 const subCatInfoRoutes = require("./componentapi/SubCatInfo/Routes");
 const categoryRoutes = require("./componentapi/Category/Routes");
 const subcategoryRoutes = require("./componentapi/Subcategory/Routes");
-const bannerRoutes = require("./componentapi/bannerMgm/Routes")
+const bannerRoutes = require("./componentapi/bannerMgm/routes")
 const app = express();
 
 app.use(cors());
