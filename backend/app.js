@@ -3,7 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const roleaccessRoutes = require('./componentapi/AccessApi/Routes');
-const appointmentRoutes = require("./componentapi/Appointments/routes");
+const appointmentRoutes = require("./componentapi/Appointments/Routes");
 const userRoutes = require("./componentapi/UserManagement/Routes");
 const blogsRoutes = require("./componentapi/BlogsManagement/Routes");
 const faqRoutes = require("./componentapi/FaqManagement/Routes");
@@ -11,7 +11,7 @@ const reviewRoutes = require("./componentapi/ReviewsManagement/Routes");
 const subCatInfoRoutes = require("./componentapi/SubCatInfo/Routes");
 const categoryRoutes = require("./componentapi/Category/Routes");
 const subcategoryRoutes = require("./componentapi/Subcategory/Routes");
-const bannerRoutes = require("./componentapi/bannerMgm/routes")
+const bannerRoutes = require("./componentapi/bannerMgm/Routes")
 const app = express();
 
 app.use(cors());
