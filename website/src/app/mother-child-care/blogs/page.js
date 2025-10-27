@@ -1,12 +1,14 @@
+import React, { Suspense } from 'react'
 import BlogsList from '@/components/web/Blogs/BlogsList'
-import React from 'react'
 
-const page = () => {
+const Page = () => {
   return (
     <div>
-        <BlogsList/>
+      <Suspense fallback={<div>Loading blogs...</div>}>
+        <BlogsList />
+      </Suspense>
     </div>
   )
 }
 
-export default page
+export default Page
