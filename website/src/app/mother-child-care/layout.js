@@ -14,7 +14,7 @@ export default function WebsiteLayout({ children }) {
   return (
     <Provider store={store}>
       <div className="flex flex-col min-h-screen">
-        <SubHeader />
+        {/* <SubHeader /> */}
 
         <main className="flex-1">
           {children}

@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
-
+import { useRouter } from "next/navigation";
 export default function Userlist() {
+  const router = useRouter();
+
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [selectedRole, setSelectedRole] = useState("all");
@@ -31,6 +33,9 @@ export default function Userlist() {
   };
 
   const handleDelete = async (id) => {
+
+    console.log("id",id);
+    
     const confirmDelete = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -46,11 +51,16 @@ export default function Userlist() {
         await axios.delete(`/api/user/delete/delete-user/${id}`);
         setUsers(users.filter((user) => user.id !== id));
         Swal.fire("Deleted!", "User has been deleted.", "success");
+        fetchUsers();
       } catch (error) {
         Swal.fire("Error", "Failed to delete user.", "error");
       }
     }
   };
+
+  const handleEdit = (id) => {
+    router.push(`/admin/user-management/add-user/${id}`);
+  }
 
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(
@@ -143,13 +153,13 @@ export default function Userlist() {
                   <td className="px-4 py-3 border text-center space-x-2">
                     <button
                       className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1.5 rounded-md text-xs font-medium transition"
-                      onClick={() => console.log("Edit user:", user)}
+                      onClick={() => handleEdit(user._id)}
                     >
                       Edit
                     </button>
                     <button
                       className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-xs font-medium transition"
-                      onClick={() => handleDelete(user.id)}
+                      onClick={() => handleDelete(user._id)}
                     >
                       Delete
                     </button>

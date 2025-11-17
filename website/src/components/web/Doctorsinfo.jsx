@@ -51,8 +51,9 @@ const Doctorsinfo = () => {
                                 alt={doctor.name}
                                 width={144}
                                 height={144}
-                                className="object-cover w-full h-full"
+                                className="object-cover w-full h-full transition-transform duration-500"
                             />
+
                         </div>
 
                         {/* Doctor Info */}

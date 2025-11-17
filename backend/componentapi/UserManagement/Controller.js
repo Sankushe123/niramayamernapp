@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const sendEmail = require('../../Utils/sendEmailInqueiry');
+const { log } = require("console");
 
 const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 
@@ -11,21 +12,27 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 const otpStore = new Map();
 
 
-exports.createUser = async (req, res) => {
-  try {
+exports.createUser =async (req, res) => {
+    try {
     const { email, password, ...rest } = req.body;
+
+
+    console.log("req.body;",req.body);
+    
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
+
     if (existingUser) return res.status(400).json({ message: 'Email already exists' });
 
     // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    // const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
       _id: new mongoose.Types.ObjectId(),
       email,
-      password: hashedPassword,
+      password,
       ...rest
     });
 
@@ -108,8 +115,7 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
+    
     const user = new User({
       first_name,
       last_name,
@@ -119,7 +125,7 @@ exports.register = async (req, res) => {
       gender,
       address,
       city,
-      password: hashedPassword,
+      password: password,
       aadhar_no,
       aadhar_image: aadhar_image ? JSON.stringify(aadhar_image) : null,
       role
@@ -144,12 +150,18 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    // console.log("req.body",req.body);
+    
+
+    const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
+
+    console.log("isMatch",isMatch);
+    
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }

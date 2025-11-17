@@ -137,7 +137,8 @@ import Adspage from '../widgets/Common/Adspage';
 import { useSelector, useDispatch } from 'react-redux';
 import { openAppointment } from '../../store/accessSlice';
 import axios from 'axios';
-
+import { BiSolidQuoteRight } from "react-icons/bi";
+import { BiSolidQuoteLeft } from "react-icons/bi";
 const Home = () => {
   const [showAd, setShowAd] = useState(false); // ✅ default false
   const dispatch = useDispatch();
@@ -196,9 +197,9 @@ const Home = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-purple-800 via-blue-600 to-teal-500 animate-gradient z-0"></div>
 
         <h2 className="max-w-4xl text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold font-sans relative z-10">
-          <span className="text-headtextColor text-2xl sm:text-3xl md:text-4xl font-serif">"</span>
+          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif">" </span>
           Health is the greatest wealth. Take care of your body, it's the only place you have to live.
-          <span className="text-headtextColor text-2xl sm:text-3xl md:text-4xl font-serif">"</span>
+          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif"> "</span>
         </h2>
 
         <button
@@ -224,6 +225,35 @@ const Home = () => {
       {/* Other Sections */}
       <Doctorsinfo />
       <BlogSection />
+      {/* Quote Section */}
+     <div className="relative h-auto min-h-[15rem] w-full flex flex-col items-center justify-center text-white p-6 sm:p-8 md:p-10 overflow-hidden text-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-800 via-blue-600 to-teal-500 animate-gradient z-0"></div>
+
+        <h2 className="max-w-4xl text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold font-sans relative z-10">
+          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif">" </span>
+          Health is the greatest wealth. Take care of your body, it's the only place you have to live.
+          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif"> "</span>
+        </h2>
+
+        <button
+          onClick={() => dispatch(openAppointment())}
+          className="mt-6 bg-white text-gray-900 font-semibold py-2 px-6 rounded-lg shadow-md hover:bg-gray-200 transition relative z-10"
+        >
+          Book Appointment
+        </button>
+
+        <style jsx>{`
+          @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradientAnimation 6s ease infinite;
+          }
+        `}</style>
+      </div>
       <PatientReviews />
       <Contactus />
       {/* <Footer /> */}

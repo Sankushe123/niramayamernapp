@@ -194,68 +194,76 @@ const AppointmentPage = ({ closeModal }) => {
 
                         {/* Right Part: Form */}
                         <div className="w-4/6 p-4">
-                            <form onSubmit={handleSubmit} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-semibold">Full Name</label>
-                                    <input
-                                        type="text"
-                                        name="fullName"
-                                        value={formData.fullName}
-                                        onChange={handleInputChange}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-semibold">Mobile Number</label>
-                                    <input
-                                        type="tel"
-                                        name="mobileNumber"
-                                        value={formData.mobileNumber}
-                                        onChange={handleInputChange}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-semibold">Email</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleInputChange}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    />
-                                </div>
+                            <form onSubmit={handleSubmit} className="w-full">
 
-                                <div>
-                                    <label className="block text-sm font-semibold">Doctor</label>
-                                    <select
-                                        name="doctorName"
-                                        value={formData.doctorName}
-                                        onChange={(e) => {
-                                            setFormData((prev) => ({
-                                                ...prev,
-                                                doctorName: e.target.value,
-                                            }))
-                                        }}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    >
-                                        <option value="">Select Doctor</option>
-                                        {doctorsNames.map((role, index) => (
-                                            <option key={index} value={role}>
-                                                {role}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
+                                {/* Responsive Grid */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
+                                    {/* Full Name */}
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Full Name</label>
+                                        <input
+                                            type="text"
+                                            name="fullName"
+                                            value={formData.fullName}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+
+                                    {/* Mobile Number */}
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Mobile Number</label>
+                                        <input
+                                            type="tel"
+                                            name="mobileNumber"
+                                            value={formData.mobileNumber}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+
+                                    {/* Email */}
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Email</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+
+                                    {/* Doctor Selection */}
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Doctor</label>
+                                        <select
+                                            name="doctorName"
+                                            value={formData.doctorName}
+                                            onChange={(e) =>
+                                                setFormData((prev) => ({ ...prev, doctorName: e.target.value }))
+                                            }
+                                            required
+                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">Select Doctor</option>
+                                            {doctorsNames.map((role, index) => (
+                                                <option key={index} value={role}>
+                                                    {role}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+
+                                </div>
 
 
                                 {/* Date Picker */}
-                                <div className="flex space-x-4">
+                                <div className="flex space-x-4 mt-6">
                                     <div className="w-1/2">
                                         <label className="block text-sm font-semibold">Select Date</label>
                                         <CalendarComponent

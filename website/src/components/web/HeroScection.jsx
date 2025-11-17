@@ -12,7 +12,7 @@ import AppointmentPage from "./AppointmentPage"; // Import the AppointmentPage c
 import { useSelector, useDispatch } from 'react-redux';
 import { openAppointment, openConsultation } from '../../store/accessSlice'; // adjust path if needed
 import Consultation from "./Consultation";
-
+import { BsCalendar2Check } from "react-icons/bs";
 
 let contactNo = process.env.NEXT_EMERGENCY_CONTACT_NO;
 
@@ -75,12 +75,16 @@ const HeroSection = () => {
             <span className="text-headtextColor font-semibold font-sans">
               Welcome to Niramaya Clinic
             </span>
-            <h1 className="text-2xl md:text-4xl font-bold mt-1 text-gray-900 leading-snug">
+            <h1 className="text-2xl md:text-4xl font-bold mt-1 text-gray-800 leading-snug">
               Expert Care for Women & Children
             </h1>
             <p className="mt-3 text-gray-700 text-sm md:text-base">
               Providing <Link href="/services/womens-health">comprehensive healthcare</Link> services
               with a focus on pediatric and women’s health. Trust our <Link href="/about">experienced team</Link> for your family’s well-being.
+            </p>
+
+            <p className="text-gray-800 font-semibold font-sans mt-4 ">
+              <span className=" ">For Emergency Consultation :</span> {contactNo}
             </p>
 
             <div className="mt-4 flex flex-col sm:flex-row justify-center lg:justify-start space-y-2 sm:space-y-0 sm:space-x-3">
@@ -104,28 +108,28 @@ const HeroSection = () => {
             <img
               src="/Images/illustrationnew.png"
               alt="Niramaya Clinic Healthcare Team providing expert care"
-              width={400}
-              height={400}
+              width={420}
+              height={420}
               priority="true"
-              className="mt-20 relative top-5 max-w-xs md:max-w-sm lg:max-w-md"
+              className="mt-20 relative top-5 max-w-xs md:max-w-sm lg:max-w-md -z-10"
             />
           </div>
         </div>
 
         {/* Services Cards Section */}
-        <div className="container mx-auto px-6 md:px-12 mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[{ title: "Online Consultation", icon: <Stethoscope className="text-blue-600 w-10 h-10" />, bg: "bg-blue-100", onClick: openConsultationModal },
-          { title: "Vaccination Services", icon: <Syringe className="text-green-600 w-10 h-10" />, bg: "bg-green-100" },
-          { title: "Book Appointments", icon: <Calendar className="text-yellow-600 w-10 h-10" />, bg: "bg-yellow-100", onClick: openAppointmentOpen },
-          { title: "Check Availability", icon: <CalendarDays className="text-blue-600 w-10 h-10" />, bg: "bg-blue-100", onClick: openModal }
+        <div className="container mx-auto px-6 md:px-12 mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 z-50 relative">
+          {[{ title: "Online Consultation", icon: <Stethoscope className="text-headtextColor w-9 h-9" />, bg: "bg-white", onClick: openConsultationModal },
+          { title: "Vaccination Services", icon: <Syringe className="text-headtextColor w-9 h-9" />, bg: "bg-white" },
+          { title: "Book Appointments", icon: <BsCalendar2Check className="text-headtextColor w-8 h-8" />, bg: "bg-white", onClick: openAppointmentOpen },
+          { title: "Check Availability", icon: <CalendarDays className="text-headtextColor w-9 h-9" />, bg: "bg-white", onClick: openModal }
           ].map((service, index) => (
             <div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center text-center transition transform hover:scale-105 cursor-pointer"
+              className="bg-[#EAE6E0] p-6 rounded-lg shadow-md flex flex-col items-center text-center transition transform hover:scale-105 cursor-pointer"
               onClick={service.onClick} // if onClick exists
             >
               <div className={`${service.bg} p-4 rounded-full mb-4`}>{service.icon}</div>
-              <h3 className="text-lg font-semibold">{service.title}</h3>
+              <h3 className="text-lg font-semibold text-gray-800">{service.title}</h3>
             </div>
           ))}
         </div>

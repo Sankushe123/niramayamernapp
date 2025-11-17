@@ -57,7 +57,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 md:px-14 flex justify-between items-center">
         {/* Logo */}
         <Link href="/" className="text-xl font-bold flex items-center">
-          <img src="/Images/niramayalogo.png" alt="Logo" className="h-9 mr-2" />
+          <img src="/Images/niramayalogo.png" alt="Logo" className="h-11 mr-2" />
         </Link>
         
 

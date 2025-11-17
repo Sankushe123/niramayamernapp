@@ -77,7 +77,7 @@
 //         <div className="relative flex flex-col p-4 px-6 border rounded-lg shadow-sm w-full md:w-72 h-18 overflow-hidden transition transform hover:scale-105">
 //         {/* Top Right Icon */}
 //         {/* <ArrowUpRight className="absolute top-2 right-2 w-5 h-5 border rounded-full p-0.5 cursor-pointer text-gray-500" /> */}
-    
+
 //         <div className="items-center gap-3 w-full">
 //             <div className="w-10 h-10 flex justify-center items-center bg-blue-100 rounded-full">
 //                 <span className="text-blue-600 text-lg">{icon}</span>
@@ -93,7 +93,7 @@
 
 
 
-import { Stethoscope, Syringe,ChevronRight , ArrowUpRight , HeartPulse, Baby, Activity,ShieldCheck,FileHeart ,ScanEye , BrainCircuit, CalendarHeart, HeartHandshake } from "lucide-react";
+import { Stethoscope, Syringe, ChevronRight, ArrowUpRight, HeartPulse, Baby, Activity, ShieldCheck, FileHeart, ScanEye, BrainCircuit, CalendarHeart, HeartHandshake } from "lucide-react";
 
 const services = {
     pediatric: [
@@ -129,11 +129,11 @@ export default function ServicesSection() {
     return (
         <div className="flex flex-col items-center py-10 px-5">
             <h2 className="text-2xl font-semibold mb-2">Our Services</h2>
-            <h3 className="text-2xl font-semibold text-blue-600 mb-6 text-center">Gynecology Services</h3>
+            <h3 className="text-2xl font-semibold text-[#DF42A0] mb-6 text-center">Gynecology Services</h3>
             <div className="flex flex-col md:flex-row items-center justify-center gap-20 w-full">
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                     {gynecologyleftServices.map((service, index) => (
-                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} />
+                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} type="gynecology" />
                     ))}
                 </div>
                 <div className="w-64 h-64 flex justify-center items-center">
@@ -141,7 +141,7 @@ export default function ServicesSection() {
                 </div>
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                     {gynecologyrightServices.map((service, index) => (
-                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} />
+                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} type="gynecology" />
                     ))}
                 </div>
             </div>
@@ -150,7 +150,7 @@ export default function ServicesSection() {
             <div className="flex flex-col md:flex-row items-center justify-center gap-20 w-full">
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                     {pediatricleftServices.map((service, index) => (
-                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} />
+                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} type="pediatric" />
                     ))}
                 </div>
                 <div className="w-64 h-64 flex justify-center items-center">
@@ -158,7 +158,7 @@ export default function ServicesSection() {
                 </div>
                 <div className="flex flex-col gap-4 w-full md:w-auto">
                     {pediatricrightServices.map((service, index) => (
-                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} />
+                        <ServiceCard key={index} title={service.title} description={service.desc} icon={service.icon} type="pediatric" />
                     ))}
                 </div>
             </div>
@@ -166,22 +166,26 @@ export default function ServicesSection() {
     );
 }
 
-function ServiceCard({ title, description, icon }) {
+function ServiceCard({ title, description, icon ,type }) {
+    const isGyno = type === "gynecology";
     return (
         <div className="relative flex flex-col p-4 px-6 border rounded-lg shadow-sm w-full md:w-72 h-18 overflow-hidden transition transform hover:scale-105">
-        {/* Top Right Icon */}
-        {/* <ArrowUpRight className="absolute top-2 right-2 w-5 h-5 border rounded-full p-0.5 cursor-pointer text-gray-500" /> */}
-    
-        <div className="items-center gap-3 w-full">
-            <div className="w-10 h-10 flex justify-center items-center bg-blue-100 rounded-full">
-                <span className="text-blue-600 text-lg">{icon}</span>
-            </div>
-            <div className="truncate">
-                <h3 className="font-semibold truncate mt-1">{title}</h3>
-                <p className="text-sm text-gray-600 truncate">{description}</p>
+            {/* Top Right Icon */}
+            {/* <ArrowUpRight className="absolute top-2 right-2 w-5 h-5 border rounded-full p-0.5 cursor-pointer text-gray-500" /> */}
+
+            <div className="items-center gap-3 w-full">
+                <div className={`w-10 h-10 flex justify-center items-center rounded-full 
+                    ${isGyno ? "bg-pink-100" : "bg-blue-100"}`}>
+                    <span className={`${isGyno ? "text-[#DF42A0]" : "text-blue-600"} text-lg`}>
+                        {icon}
+                    </span>
+                </div>
+                <div className="truncate">
+                    <h3 className="font-semibold truncate mt-1">{title}</h3>
+                    <p className="text-sm text-gray-600 truncate">{description}</p>
+                </div>
             </div>
         </div>
-    </div>
     );
 }
 
