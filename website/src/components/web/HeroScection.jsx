@@ -69,7 +69,7 @@ const HeroSection = () => {
         <Navbar />
 
         {/* Hero Main Content */}
-        <div className="container mx-auto px-4 md:px-8 lg:flex lg:items-center lg:justify-between">
+        <div className="container mx-auto  pt-10  md:pt-0 px-4 md:px-8 lg:flex lg:items-center lg:justify-between">
           {/* Left Side */}
           <div className="lg:w-2/5 text-center lg:text-left bg-opacity-70 p-6 rounded-lg">
             <span className="text-headtextColor font-semibold font-sans">
@@ -111,7 +111,7 @@ const HeroSection = () => {
               width={420}
               height={420}
               priority="true"
-              className="mt-20 relative top-5 max-w-xs md:max-w-sm lg:max-w-md -z-10"
+              className="mt-20 relative top-5 max-w-xs md:max-w-sm lg:max-w-md z-10"
             />
           </div>
         </div>

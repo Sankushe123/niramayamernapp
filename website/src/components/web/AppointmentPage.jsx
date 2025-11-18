@@ -184,22 +184,20 @@ const AppointmentPage = ({ closeModal }) => {
                     </button>
                     <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Book Appointment</h2>
 
-                    <div className="flex space-x-4">
+                    <div className="flex flex-col md:flex-row md:space-x-4">
                         {/* Left Part: Online Consultation Message */}
-                        <div className="w-2/6 p-4 border-r border-gray-300">
+                        <div className="hidden md:block w-2/6 p-4 border-r border-gray-300">
                             <p className="text-sm text-gray-600">
                                 Please fill in your details below, and we'll get in touch with you for an online consultation.
                             </p>
                         </div>
 
-                        {/* Right Part: Form */}
-                        <div className="w-4/6 p-4">
+                        <div className="w-full md:w-2/3 p-2 sm:p-4">
                             <form onSubmit={handleSubmit} className="w-full">
 
-                                {/* Responsive Grid */}
+                                {/* GRID INPUTS */}
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                                    {/* Full Name */}
                                     <div className="flex flex-col">
                                         <label className="text-sm font-semibold mb-1">Full Name</label>
                                         <input
@@ -208,11 +206,10 @@ const AppointmentPage = ({ closeModal }) => {
                                             value={formData.fullName}
                                             onChange={handleInputChange}
                                             required
-                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                                         />
                                     </div>
 
-                                    {/* Mobile Number */}
                                     <div className="flex flex-col">
                                         <label className="text-sm font-semibold mb-1">Mobile Number</label>
                                         <input
@@ -221,11 +218,10 @@ const AppointmentPage = ({ closeModal }) => {
                                             value={formData.mobileNumber}
                                             onChange={handleInputChange}
                                             required
-                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                                         />
                                     </div>
 
-                                    {/* Email */}
                                     <div className="flex flex-col">
                                         <label className="text-sm font-semibold mb-1">Email</label>
                                         <input
@@ -234,11 +230,10 @@ const AppointmentPage = ({ closeModal }) => {
                                             value={formData.email}
                                             onChange={handleInputChange}
                                             required
-                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                                         />
                                     </div>
 
-                                    {/* Doctor Selection */}
                                     <div className="flex flex-col">
                                         <label className="text-sm font-semibold mb-1">Doctor</label>
                                         <select
@@ -248,24 +243,24 @@ const AppointmentPage = ({ closeModal }) => {
                                                 setFormData((prev) => ({ ...prev, doctorName: e.target.value }))
                                             }
                                             required
-                                            className="w-full h-10 px-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
                                         >
                                             <option value="">Select Doctor</option>
-                                            {doctorsNames.map((role, index) => (
-                                                <option key={index} value={role}>
-                                                    {role}
+                                            {doctorsNames.map((name, i) => (
+                                                <option key={i} value={name}>
+                                                    {name}
                                                 </option>
                                             ))}
                                         </select>
                                     </div>
-
                                 </div>
 
+                                {/* DATE + TIME (STACK ON MOBILE, SIDE-BY-SIDE ON DESKTOP) */}
+                                <div className="flex flex-col sm:flex-row sm:space-x-4 mt-6">
 
-                                {/* Date Picker */}
-                                <div className="flex space-x-4 mt-6">
-                                    <div className="w-1/2">
-                                        <label className="block text-sm font-semibold">Select Date</label>
+                                    {/* Calendar */}
+                                    <div className="w-full sm:w-1/2">
+                                        <label className="text-sm font-semibold">Select Date</label>
                                         <CalendarComponent
                                             onChange={handleDateChange}
                                             value={formData.date}
@@ -273,61 +268,13 @@ const AppointmentPage = ({ closeModal }) => {
                                         />
                                     </div>
 
-                                    {/* Time Slot Picker */}
-                                    <div className="w-1/2">
-                                        <label className="block text-sm font-semibold">Select Time Slot</label>
-                                        {/* <div className="h-72 overflow-y-auto grid grid-cols-2 gap-2 mb-4 pr-2 w-full">
+                                    {/* Time slots */}
+                                    <div className="w-full sm:w-1/2 mt-4 sm:mt-0">
+                                        <label className="text-sm font-semibold">Select Time Slot</label>
+                                        <div className="h-72 overflow-y-auto grid grid-cols-2 gap-2 mt-1">
                                             {availableSlots.length > 0 ? (
                                                 availableSlots.map((time, index) => {
                                                     const available = isSlotAvailable(formData.date, time);
-                                                    return (
-                                                        <button
-                                                            key={index}
-                                                            type="button"
-                                                            onClick={() => available && handleTimeSelect(time)}
-                                                            disabled={!available}
-                                                            className={`p-2 border rounded-md text-center flex items-center justify-center gap-2 ${formData.time === time
-                                                                ? 'bg-blue-600 text-white'
-                                                                : available
-                                                                    ? 'bg-gray-100 hover:bg-gray-200'
-                                                                    : 'bg-red-100 cursor-not-allowed'
-                                                                }`}
-                                                        >
-                                                            {time}
-                                                            {!available && (
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    className="h-4 w-4 text-red-500"
-                                                                    viewBox="0 0 20 20"
-                                                                    fill="currentColor"
-                                                                >
-                                                                    <path
-                                                                        fillRule="evenodd"
-                                                                        d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-1V7a1 1 0 112 0v2a1 1 0 11-2 0zm0 4a1 1 0 112 0 1 1 0 11-2 0z"
-                                                                        clipRule="evenodd"
-                                                                    />
-                                                                </svg>
-                                                            )}
-                                                        </button>
-                                                    );
-                                                })
-                                            ) : (
-                                                <p className="text-sm text-gray-500">No slots available.</p>
-                                            )}
-                                        </div> */}
-                                        <div className="h-72 mt-1 overflow-y-auto grid grid-cols-2 gap-2 mb-4 pr-2 w-full">
-                                            {availableSlots.length > 0 ? (
-                                                availableSlots.map((time, index) => {
-                                                    // 👇 Safely parse the date string in local timezone
-                                                    let dateObj;
-                                                    if (typeof formData.date === 'string') {
-                                                        const [year, month, day] = formData.date.split('-');
-                                                        dateObj = new Date(Number(year), Number(month) - 1, Number(day));
-                                                    } else {
-                                                        dateObj = formData.date;
-                                                    }
-
-                                                    const available = isSlotAvailable(dateObj, time);
 
                                                     return (
                                                         <button
@@ -335,7 +282,7 @@ const AppointmentPage = ({ closeModal }) => {
                                                             type="button"
                                                             onClick={() => available && handleTimeSelect(time)}
                                                             disabled={!available}
-                                                            className={`p-2 border rounded-md text-center flex items-center justify-center gap-2 ${formData.time === time
+                                                            className={`p-2 border rounded-md text-center ${formData.time === time
                                                                 ? 'bg-blue-600 text-white'
                                                                 : available
                                                                     ? 'bg-gray-100 hover:bg-gray-200'
@@ -343,91 +290,49 @@ const AppointmentPage = ({ closeModal }) => {
                                                                 }`}
                                                         >
                                                             {time}
-                                                            {!available && (
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    className="h-4 w-4 text-red-500"
-                                                                    viewBox="0 0 20 20"
-                                                                    fill="currentColor"
-                                                                >
-                                                                    <path
-                                                                        fillRule="evenodd"
-                                                                        d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-1V7a1 1 0 112 0v2a1 1 0 11-2 0zm0 4a1 1 0 112 0 1 1 0 11-2 0z"
-                                                                        clipRule="evenodd"
-                                                                    />
-                                                                </svg>
-                                                            )}
                                                         </button>
                                                     );
                                                 })
                                             ) : (
-                                                <p className="text-sm text-gray-500">No slots available.</p>
+                                                <p className="text-gray-500 text-sm">No slots available.</p>
                                             )}
                                         </div>
-
                                     </div>
                                 </div>
 
-                                <div>
-                                    <label className="block text-sm font-semibold">
-                                        Message <span className="text-gray-500 text-xs">(optional)</span>
-                                    </label>
-
+                                {/* Message */}
+                                <div className="mt-4">
+                                    <label className="text-sm font-semibold">Message (optional)</label>
                                     <textarea
                                         name="message"
                                         value={formData.message}
                                         onChange={handleInputChange}
-
-                                        className="w-full  p-2 border border-gray-300 rounded-md"
+                                        className="w-full p-2 border border-gray-300 rounded-md"
                                     />
                                 </div>
 
-                                {/* Mode of Appointment Radio Buttons */}
-                                {/* <div>
-                                    <label className="block text-sm font-semibold">Mode of Appointment</label>
-                                    <div className="flex items-center space-x-4 mt-2">
-                                        <label className="flex items-center space-x-2">
-                                            <input
-                                                type="radio"
-                                                name="appointmentMode"
-                                                value="online"
-                                                checked={formData.appointmentMode === 'online'}
-                                                onChange={handleModeChange}
-                                                className="text-blue-600 focus:ring-0 focus:ring-blue-0 focus:outline-none"
-                                            />
-                                            <span>Online Consultation</span>
-                                        </label>
-                                        <label className="flex items-center space-x-2">
-                                            <input
-                                                type="radio"
-                                                name="appointmentMode"
-                                                value="inClinic"
-                                                checked={formData.appointmentMode === 'inClinic'}
-                                                onChange={handleModeChange}
-                                                className="text-blue-600 focus:ring-0 focus:ring-blue-0 focus:outline-none"
-                                            />
-                                            <span>In-Clinic Appointment</span>
-                                        </label>
-                                    </div>
-                                </div> */}
-
-
-                                <div className="pt-2 mt-4">
+                                {/* Submit Button */}
+                                <div className="mt-6">
                                     <button
                                         type="submit"
                                         disabled={loading}
-                                        className={`w-full py-3 mt-5 rounded-md transition 
-                ${loading ? 'bg-blue-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700 text-white'}`}
+                                        className={`w-full py-3 rounded-md ${loading
+                                            ? 'bg-blue-400 cursor-not-allowed'
+                                            : 'bg-blue-600 hover:bg-blue-700 text-white'
+                                            }`}
                                     >
-                                        {loading ? "Submitting..." : "Submit"}
+                                        {loading ? 'Submitting...' : 'Submit'}
                                     </button>
                                 </div>
-
                             </form>
                         </div>
+
+
+                        {/* Right Part: Form */}
+
                     </div>
                 </div>
-            </div>
+            </div >
         )
     );
 };

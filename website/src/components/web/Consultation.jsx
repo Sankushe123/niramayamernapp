@@ -184,78 +184,82 @@ const Consultation = () => {
                     </button>
                     <h2 className="text-2xl font-bold text-center text-blue-600 mb-6">Online Consultation</h2>
 
-                    <div className="flex space-x-4">
+                    <div className="flex flex-col md:flex-row md:space-x-4">
                         {/* Left Part: Online Consultation Message */}
-                        <div className="w-2/6 p-4 border-r border-gray-300">
+                        <div className="hidden md:block w-2/6 p-4 border-r border-gray-300">
                             <p className="text-sm text-gray-600">
                                 Please fill in your details below, and we'll get in touch with you for an online consultation.
                             </p>
                         </div>
 
                         {/* Right Part: Form */}
-                        <div className="w-4/6 p-4">
+                        <div className="w-full md:w-2/3 p-2 sm:p-4">
                             <form onSubmit={handleSubmit} className="space-y-4">
-                                <div>
-                                    <label className="block text-sm font-semibold">Full Name</label>
-                                    <input
-                                        type="text"
-                                        name="fullName"
-                                        value={formData.fullName}
-                                        onChange={handleInputChange}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-semibold">Mobile Number</label>
-                                    <input
-                                        type="tel"
-                                        name="mobileNumber"
-                                        value={formData.mobileNumber}
-                                        onChange={handleInputChange}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    />
-                                </div>
-                                <div>
-                                    <label className="block text-sm font-semibold">Email</label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formData.email}
-                                        onChange={handleInputChange}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    />
-                                </div>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                                <div>
-                                    <label className="block text-sm font-semibold">Doctor</label>
-                                    <select
-                                        name="doctorName"
-                                        value={formData.doctorName}
-                                        onChange={(e) => {
-                                            setFormData((prev) => ({
-                                                ...prev,
-                                                doctorName: e.target.value,
-                                            }))
-                                        }}
-                                        required
-                                        className="w-full h-9 px-2 border border-gray-300 rounded-md"
-                                    >
-                                        <option value="">Select Doctor</option>
-                                        {doctorsNames.map((role, index) => (
-                                            <option key={index} value={role}>
-                                                {role}
-                                            </option>
-                                        ))}
-                                    </select>
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Full Name</label>
+                                        <input
+                                            type="text"
+                                            name="fullName"
+                                            value={formData.fullName}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Mobile Number</label>
+                                        <input
+                                            type="tel"
+                                            name="mobileNumber"
+                                            value={formData.mobileNumber}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Email</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            value={formData.email}
+                                            onChange={handleInputChange}
+                                            required
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                        />
+                                    </div>
+
+                                    <div className="flex flex-col">
+                                        <label className="text-sm font-semibold mb-1">Doctor</label>
+                                        <select
+                                            name="doctorName"
+                                            value={formData.doctorName}
+                                            onChange={(e) =>
+                                                setFormData((prev) => ({ ...prev, doctorName: e.target.value }))
+                                            }
+                                            required
+                                            className="h-10 px-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                        >
+                                            <option value="">Select Doctor</option>
+                                            {doctorsNames.map((name, i) => (
+                                                <option key={i} value={name}>
+                                                    {name}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
                                 </div>
 
                                 {/* Date Picker */}
-                                <div className="flex space-x-4">
-                                    <div className="w-1/2">
-                                        <label className="block text-sm font-semibold">Select Date</label>
+                                <div className="flex flex-col sm:flex-row sm:space-x-4 mt-6">
+
+                                    {/* Calendar */}
+                                    <div className="w-full sm:w-1/2">
+                                        <label className="text-sm font-semibold">Select Date</label>
                                         <CalendarComponent
                                             onChange={handleDateChange}
                                             value={formData.date}
@@ -263,22 +267,13 @@ const Consultation = () => {
                                         />
                                     </div>
 
-                                    <div className="w-1/2">
-                                        <label className="block text-sm font-semibold">Select Time Slot</label>
-                                       
-                                        <div className="h-72 mt-1 overflow-y-auto grid grid-cols-2 gap-2 mb-4 pr-2 w-full">
+                                    {/* Time slots */}
+                                    <div className="w-full sm:w-1/2 mt-4 sm:mt-0">
+                                        <label className="text-sm font-semibold">Select Time Slot</label>
+                                        <div className="h-72 overflow-y-auto grid grid-cols-2 gap-2 mt-1">
                                             {availableSlots.length > 0 ? (
                                                 availableSlots.map((time, index) => {
-                                                    // 👇 Safely parse the date string in local timezone
-                                                    let dateObj;
-                                                    if (typeof formData.date === 'string') {
-                                                        const [year, month, day] = formData.date.split('-');
-                                                        dateObj = new Date(Number(year), Number(month) - 1, Number(day));
-                                                    } else {
-                                                        dateObj = formData.date;
-                                                    }
-
-                                                    const available = isSlotAvailable(dateObj, time);
+                                                    const available = isSlotAvailable(formData.date, time);
 
                                                     return (
                                                         <button
@@ -286,7 +281,7 @@ const Consultation = () => {
                                                             type="button"
                                                             onClick={() => available && handleTimeSelect(time)}
                                                             disabled={!available}
-                                                            className={`p-2 border rounded-md text-center flex items-center justify-center gap-2 ${formData.time === time
+                                                            className={`p-2 border rounded-md text-center ${formData.time === time
                                                                 ? 'bg-blue-600 text-white'
                                                                 : available
                                                                     ? 'bg-gray-100 hover:bg-gray-200'
@@ -294,28 +289,13 @@ const Consultation = () => {
                                                                 }`}
                                                         >
                                                             {time}
-                                                            {!available && (
-                                                                <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    className="h-4 w-4 text-red-500"
-                                                                    viewBox="0 0 20 20"
-                                                                    fill="currentColor"
-                                                                >
-                                                                    <path
-                                                                        fillRule="evenodd"
-                                                                        d="M18 10A8 8 0 11 2 10a8 8 0 0116 0zm-9-1V7a1 1 0 112 0v2a1 1 0 11-2 0zm0 4a1 1 0 112 0 1 1 0 11-2 0z"
-                                                                        clipRule="evenodd"
-                                                                    />
-                                                                </svg>
-                                                            )}
                                                         </button>
                                                     );
                                                 })
                                             ) : (
-                                                <p className="text-sm text-gray-500">No slots available.</p>
+                                                <p className="text-gray-500 text-sm">No slots available.</p>
                                             )}
                                         </div>
-
                                     </div>
                                 </div>
 

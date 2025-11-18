@@ -14,12 +14,14 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Best Pediatrician & Gynecologist in Pune | Expert Women's & Child Care",
+  title: "Best Pediatrician & Gynecologist in Ravet | Expert Women's & Child Care",
   description:
-    "Looking for the best pediatrician and gynecologist in Pune? We offer expert healthcare services for women and children in Pimpri-Chinchwad, Wakad, Hinjawadi, and more. Book an appointment today!",
+    "Top pediatric and gynecology services in Ravet, Wakad, and Hinjawadi. Quality care for women and children.",
   keywords: [
     "best pediatrician in Ravet",
     "best gynecologist in Ravet",
+    "top pediatrician in Ravet",
+    "top gynecologist in Ravet",
     "best pediatrician in Pune",
     "best gynecologist in Pune",
     "best pediatrician in Pimpri-Chinchwad",
@@ -75,22 +77,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-
-
-// app/layout.js
-
-
-// import "./globals.css";
-
-// export const metadata = {
-//   title: "My Web App",
-//   description: "Mother Child Care and Admin Portal",
-// };
-
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body>{children}</body>
-//     </html>
-//   );
-// }

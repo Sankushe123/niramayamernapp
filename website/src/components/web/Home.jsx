@@ -196,10 +196,10 @@ const Home = () => {
       <div className="relative h-auto min-h-[15rem] w-full flex flex-col items-center justify-center text-white p-6 sm:p-8 md:p-10 overflow-hidden text-center">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-800 via-blue-600 to-teal-500 animate-gradient z-0"></div>
 
-        <h2 className="max-w-4xl text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold font-sans relative z-10">
-          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif">" </span>
-          Health is the greatest wealth. Take care of your body, it's the only place you have to live.
-          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif"> "</span>
+        <h2 className="max-w-5xl text-base sm:text-lg md:text-xl lg:text-2xl font-semibold font-sans relative z-10">
+          {/* <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif">" </span> */}
+          At our Clinic, your health comes first — with trusted care designed to heal, comfort, and uplift you and your family
+          {/* <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif"> "</span> */}
         </h2>
 
         <button
@@ -226,13 +226,13 @@ const Home = () => {
       <Doctorsinfo />
       <BlogSection />
       {/* Quote Section */}
-     <div className="relative h-auto min-h-[15rem] w-full flex flex-col items-center justify-center text-white p-6 sm:p-8 md:p-10 overflow-hidden text-center">
+      <div className="relative h-auto min-h-[15rem] w-full flex flex-col items-center justify-center text-white p-6 sm:p-8 md:p-10 overflow-hidden text-center">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-800 via-blue-600 to-teal-500 animate-gradient z-0"></div>
 
-        <h2 className="max-w-4xl text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold font-sans relative z-10">
-          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif">" </span>
-          Health is the greatest wealth. Take care of your body, it's the only place you have to live.
-          <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif"> "</span>
+        <h2 className="max-w-5xl text-base sm:text-lg md:text-xl lg:text-2xl font-semibold font-sans relative z-10">
+          {/* <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif">" </span> */}
+          To deliver compassionate, reliable, and expert care that supports every woman, every child, and every family.
+          {/* <span className="text-white text-2xl sm:text-3xl md:text-4xl font-serif"> "</span> */}
         </h2>
 
         <button
