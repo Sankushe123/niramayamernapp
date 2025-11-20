@@ -50,6 +50,17 @@ const Consultation = () => {
     const isConsultatiopn = useSelector((state) => state.consultation.isConsultationOpen);
     const dispatch = useDispatch();
 
+    const isPastTime = (date, time) => {
+        const now = new Date();
+
+        const selectedDate = new Date(date);
+        const [hours, minutes] = time.split(':').map(Number);
+        selectedDate.setHours(hours, minutes, 0, 0);
+
+        return selectedDate < now; // true = past
+    };
+
+
     // Generate time slots based on start and end times
     const generateTimeSlots = (startTime, endTime) => {
         const slots = [];
@@ -263,6 +274,7 @@ const Consultation = () => {
                                         <CalendarComponent
                                             onChange={handleDateChange}
                                             value={formData.date}
+                                            minDate={new Date()}
                                             className="rounded-md shadow w-full mt-1"
                                         />
                                     </div>
@@ -273,7 +285,9 @@ const Consultation = () => {
                                         <div className="h-72 overflow-y-auto grid grid-cols-2 gap-2 mt-1">
                                             {availableSlots.length > 0 ? (
                                                 availableSlots.map((time, index) => {
-                                                    const available = isSlotAvailable(formData.date, time);
+                                                    const isPast = isPastTime(formData.date, time);
+                                                    const available = isSlotAvailable(formData.date, time) && !isPast;
+
 
                                                     return (
                                                         <button
@@ -282,14 +296,15 @@ const Consultation = () => {
                                                             onClick={() => available && handleTimeSelect(time)}
                                                             disabled={!available}
                                                             className={`p-2 border rounded-md text-center ${formData.time === time
-                                                                ? 'bg-blue-600 text-white'
-                                                                : available
-                                                                    ? 'bg-gray-100 hover:bg-gray-200'
-                                                                    : 'bg-red-100 cursor-not-allowed'
+                                                                    ? 'bg-blue-600 text-white'
+                                                                    : available
+                                                                        ? 'bg-gray-100 hover:bg-gray-200'
+                                                                        : 'bg-red-100 cursor-not-allowed'
                                                                 }`}
                                                         >
                                                             {time}
                                                         </button>
+
                                                     );
                                                 })
                                             ) : (

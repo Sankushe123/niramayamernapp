@@ -77,7 +77,7 @@ export default function Aboutus() {
             {/* Doctor Card */}
             {[{
               name: "Dr. Amol Thorat",
-              img: "/images/drAmol.jpeg",
+              img: "https://res.cloudinary.com/dzmndqvb2/image/upload/v1763485134/drAmol_ws2ogc.jpg",
               degree: "MBBS, DCH, DNB (Pediatrics & Neonatology)",
               experience: "12+ years of experience",
               description: "Dr. Amol Thorat is a highly experienced Pediatrician and Neonatologist with over a decade of dedicated service in child healthcare. He completed his MBBS from VM Government Medical College, Solapur, DCH from Mumbai, and DNB in Pediatrics from NBE, New Delhi.",
@@ -91,7 +91,7 @@ export default function Aboutus() {
             },
             {
               name: "Dr. Deepa Thorat",
-              img: "/images/drDeep1.jpg",
+              img: "https://res.cloudinary.com/dzmndqvb2/image/upload/v1763485125/drDeep1_zbmcfu.jpg",
               degree: "MBBS, MD (OBGYN), DNB, FRM, FMAS",
               experience: "8+ years of experience",
               description: "Dr. Deepa Thorat is an accomplished Obstetrician, Gynecologist, and Fertility Specialist. She completed her MBBS from GMC Aurangabad, MD (OBGY) from GMC Nagpur, and DNB from NBE, New Delhi. She also holds fellowships in Reproductive Medicine (FRM) and Minimal Access Surgery (FMAS).",

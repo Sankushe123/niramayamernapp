@@ -1,153 +1,222 @@
-"use client"
-import React, { useEffect,useState } from "react";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
-import { format, addDays, subDays, addMonths, subMonths, isSameDay } from "date-fns";
+"use client";
+import React, { useEffect, useState } from "react";
+import {
+    format,
+    startOfMonth,
+    endOfMonth,
+    startOfWeek,
+    endOfWeek,
+    addDays,
+    isSameDay,
+    isSameMonth,
+} from "date-fns";
 import axios from "axios";
-// const appointmentData = [
-//     {
-//         id: 46,
-//         fullName: "Jhon",
-//         mobileNumber: "853xxxxxxxx",
-//         email: "Jhon@gmail.com",
-//         message: "",
-//         date: "2025-05-11",
-//         time: "09:30:00",
-//         created_at: "2025-05-02T17:16:09.000Z",
-//         isOnline: 0,
-//         doctorName: "Dr. Thomas",
-//     },
-//     {
-//         id: 45,
-//         fullName: "Hojo",
-//         mobileNumber: "853xxxxxxxx",
-//         email: "Hoijo@gmail.com",
-//         message: "",
-//         date: "2025-05-19",
-//         time: "09:30:00",
-//         created_at: "2025-05-02T17:13:27.000Z",
-//         isOnline: 0,
-//         doctorName: "Dr. Iron man",
-//     },
-// ];
-
-
 
 export default function AppointmentList() {
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedAppointment, setSelectedAppointment] = useState(null);
     const [appointmentData, setAppointmentData] = useState([]);
-
+    const [selectedDay, setSelectedDay] = useState(null);
+    const [selectedAppointment, setSelectedAppointment] = useState(null);
 
     useEffect(() => {
-        axios.get('/api/v1/appoinement')
-            .then((resp) => {
-                console.log('resp', resp.data)
-                setAppointmentData(resp.data)
-            })
-            .catch((err) => {
-                console.log('error', err.message)
-            })
-    }, [])
+        axios
+            .get("/api/appointments/get")
+            .then((resp) => setAppointmentData(resp.data))
+            .catch((err) => console.log("err", err));
+    }, []);
 
-    const handleDayChange = (direction) => {
-        setCurrentDate((prevDate) =>
-            direction === "next" ? addDays(prevDate, 1) : subDays(prevDate, 1)
-        );
+    const monthStart = startOfMonth(currentDate);
+    const monthEnd = endOfMonth(monthStart);
+    const calendarStart = startOfWeek(monthStart, { weekStartsOn: 1 });
+    const calendarEnd = endOfWeek(monthEnd, { weekStartsOn: 1 });
+
+    const days = [];
+    let day = calendarStart;
+
+    while (day <= calendarEnd) {
+        days.push(day);
+        day = addDays(day, 1);
+    }
+
+    // appointment count per day
+    const appointmentCount = (d) => {
+        return appointmentData.filter((a) =>
+            isSameDay(new Date(a.date), d)
+        ).length;
     };
 
-    const handleMonthChange = (direction) => {
-        setCurrentDate((prevDate) =>
-            direction === "next" ? addMonths(prevDate, 1) : subMonths(prevDate, 1)
-        );
-    };
-
-    const filteredAppointments = appointmentData.filter((appt) =>
-        isSameDay(new Date(appt.date), currentDate)
-    );
+    const dayAppointments = selectedDay
+        ? appointmentData.filter((a) => isSameDay(new Date(a.date), selectedDay))
+        : [];
 
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
-            {/* Appointment Grid */}
-            <div className="space-y-4">
-                <h2 className="text-xl font-semibold">Check Appointments</h2>
-                <div className="flex items-center justify-between bg-gray-100 p-3 rounded-xl shadow">
-                    <div className="flex gap-2">
+        <div className="w-full flex gap-5">
+
+            <div className="w-2/3">
+                {/* Calendar */}
+                <div className="bg-white shadow rounded-lg p-2">
+
+                    {/* Header */}
+                    <div className="flex items-center justify-between mb-2">
                         <button
-                            className="p-2 rounded-full border hover:bg-gray-200"
-                            onClick={() => handleMonthChange("prev")}
+                            onClick={() => setCurrentDate(addDays(currentDate, -30))}
+                            className="px-2 py-1 text-xs rounded bg-gray-100 hover:bg-gray-200"
                         >
-                            <ChevronsLeft />
+                            Prev
                         </button>
+
+                        <h2 className="text-md font-semibold">
+                            {format(currentDate, "MMMM yyyy")}
+                        </h2>
+
                         <button
-                            className="p-2 rounded-full border hover:bg-gray-200"
-                            onClick={() => handleDayChange("prev")}
+                            onClick={() => setCurrentDate(addDays(currentDate, 30))}
+                            className="px-2 py-1 text-xs rounded bg-gray-100 hover:bg-gray-200"
                         >
-                            <ChevronLeft />
+                            Next
                         </button>
                     </div>
-                    <h3 className="text-lg font-medium">{format(currentDate, "EEEE, dd MMM yyyy")}</h3>
-                    <div className="flex gap-2">
-                        <button
-                            className="p-2 rounded-full border hover:bg-gray-200"
-                            onClick={() => handleDayChange("next")}
-                        >
-                            <ChevronRight />
-                        </button>
-                        <button
-                            className="p-2 rounded-full border hover:bg-gray-200"
-                            onClick={() => handleMonthChange("next")}
-                        >
-                            <ChevronsRight />
-                        </button>
+
+                    {/* Week Labels */}
+                    <div className="grid grid-cols-7 text-center text-gray-600 text-xs font-medium mb-1">
+                        {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((d) => (
+                            <div key={d}>{d}</div>
+                        ))}
+                    </div>
+
+                    {/* Calendar Grid */}
+                    <div className="grid grid-cols-7 gap-1">
+                        {days.map((d, idx) => {
+                            const isCurrentMonth = isSameMonth(d, currentDate);
+                            const count = appointmentCount(d);
+
+                            return (
+                                <div
+                                    key={idx}
+                                    className={`p-1 h-14 rounded-md flex flex-col items-center justify-between cursor-pointer transition 
+                                ${isCurrentMonth ? "bg-gray-100" : "bg-gray-200 opacity-50"} 
+                                ${selectedDay && isSameDay(d, selectedDay) ? "ring-2 ring-blue-500" : ""}
+                                hover:bg-gray-300`}
+                                    onClick={() => {
+                                        setSelectedDay(d);
+                                        setSelectedAppointment(null);
+                                    }}
+                                >
+                                    <div className="text-xs font-medium">
+                                        {format(d, "d")}
+                                    </div>
+
+                                    {/* Show count instead of dot */}
+                                    {count > 0 && (
+                                        <div className="text-[10px] bg-blue-600 text-white px-1.5 py-0.5 rounded-full">
+                                            {count}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
 
-                <div className="grid grid-cols-5 gap-3">
-                    {filteredAppointments.length > 0 ? (
-                        filteredAppointments.map((appt) => (
-                            <div
-                                key={appt.id}
-                                onClick={() => setSelectedAppointment(appt)}
-                                className={`rounded-lg border p-3 text-sm cursor-pointer ${selectedAppointment?.id === appt.id ? "bg-blue-600 text-white border-blue-700" : "bg-blue-100 text-blue-900 border-blue-400"}`}
-                            >
-                                <div className="font-medium">{appt.time}</div>
-                                <div className="text-xs">{appt.doctorName}</div>
-                            </div>
-                        ))
+                {/* Appointments Under Calendar */}
+                <div className="bg-white shadow rounded-lg p-2 mt-5">
+                    <h2 className="text-sm font-semibold mb-2">
+                        Appointments{" "}
+                        {selectedDay ? `(${format(selectedDay, "dd MMM")})` : ""}
+                    </h2>
+
+                    {dayAppointments.length === 0 ? (
+                        <p className="text-gray-400 text-xs">No appointments for this day.</p>
                     ) : (
-                        <div className="col-span-5 text-center text-gray-400 border p-3 rounded-lg">
-                            No Appointments for this date
+                        <div className="flex gap-3 overflow-x-auto pb-2">
+                            {dayAppointments.map((appt) => (
+                                <div
+                                    key={appt.id}
+                                    onClick={() => setSelectedAppointment(appt)}
+                                    className={`min-w-[110px] h-[90px] rounded-lg border cursor-pointer p-2 flex flex-col justify-center 
+                                ${selectedAppointment?.id === appt.id
+                                            ? "bg-blue-600 text-white"
+                                            : "bg-blue-100 text-blue-900"
+                                        }`}
+                                >
+                                    <div className="font-medium text-sm">{appt.time}</div>
+                                    <div className="text-[10px]">{appt.doctorName}</div>
+                                </div>
+                            ))}
                         </div>
                     )}
                 </div>
-
-                {/* <div className="flex justify-center gap-4 pt-4">
-                    <button className="px-4 py-2 bg-gray-200 rounded hover:bg-gray-300 text-sm font-medium">
-                        Reschedule
-                    </button>
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm font-medium">
-                        Add New
-                    </button>
-                </div> */}
             </div>
 
-            {/* Patient Details Section */}
-            <div className="bg-white rounded-xl shadow-md p-6">
-                <h2 className="text-lg font-semibold mb-4">Patient Details:</h2>
-                {selectedAppointment ? (
-                    <div className="text-sm text-gray-700 space-y-2">
-                        <p><strong>Name:</strong> {selectedAppointment.fullName}</p>
-                        <p><strong>Contact:</strong> {selectedAppointment.mobileNumber}</p>
-                        <p><strong>Email:</strong> {selectedAppointment.email}</p>
-                        <p><strong>Doctor:</strong> {selectedAppointment.doctorName}</p>
-                        <p><strong>Date:</strong> {selectedAppointment.date}</p>
-                        <p><strong>Time:</strong> {selectedAppointment.time}</p>
-                        <p><strong>Online:</strong> {selectedAppointment.isOnline ? "Yes" : "No"}</p>
-                    </div>
-                ) : (
-                    <p className="text-gray-400 text-sm">Click an appointment to see details.</p>
-                )}
+            {/* Appointment Details */}
+            <div className="w-1/3">
+                <div className="bg-white shadow-md rounded-xl p-5 border border-gray-100">
+
+                    {/* Header */}
+                    <h2 className="text-base font-semibold mb-4 text-gray-800">
+                        Appointment Details
+                    </h2>
+
+                    {selectedAppointment ? (
+                        <div className="space-y-3 text-sm">
+
+                            {/* Name */}
+                            <div className="flex justify-between pb-2 border-b">
+                                <span className="font-medium text-gray-600">Name</span>
+                                <span className="font-semibold text-gray-900">
+                                    {selectedAppointment.fullName}
+                                </span>
+                            </div>
+
+                            {/* Email */}
+                            <div className="flex justify-between pb-2 border-b">
+                                <span className="font-medium text-gray-600">Email</span>
+                                <span className="text-gray-900">{selectedAppointment.email}</span>
+                            </div>
+
+                            {/* Mobile */}
+                            <div className="flex justify-between pb-2 border-b">
+                                <span className="font-medium text-gray-600">Mobile</span>
+                                <span className="text-gray-900">{selectedAppointment.mobileNumber}</span>
+                            </div>
+
+                            {/* Doctor */}
+                            <div className="flex justify-between pb-2 border-b">
+                                <span className="font-medium text-gray-600">Doctor</span>
+                                <span className="font-semibold text-gray-900">
+                                    {selectedAppointment.doctorName}
+                                </span>
+                            </div>
+
+                            {/* Date */}
+                            <div className="flex justify-between pb-2 border-b">
+                                <span className="font-medium text-gray-600">Date</span>
+                                <span className="text-gray-900">{selectedAppointment.date}</span>
+                            </div>
+
+                            {/* Time */}
+                            <div className="flex justify-between pb-2 border-b">
+                                <span className="font-medium text-gray-600">Time</span>
+                                <span className="text-gray-900">{selectedAppointment.time}</span>
+                            </div>
+
+                            {/* Online */}
+                            <div className="flex justify-between pb-1">
+                                <span className="font-medium text-gray-600">Online</span>
+                                <span className={`font-semibold ${selectedAppointment.isOnline ? "text-green-600" : "text-red-600"}`}>
+                                    {selectedAppointment.isOnline ? "Yes" : "No"}
+                                </span>
+                            </div>
+
+                        </div>
+                    ) : (
+                        <p className="text-gray-400 text-sm py-6 text-center">
+                            Select an appointment to view details.
+                        </p>
+                    )}
+                </div>
             </div>
+
         </div>
     );
 }

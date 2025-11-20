@@ -264,6 +264,7 @@ const AppointmentPage = ({ closeModal }) => {
                                         <CalendarComponent
                                             onChange={handleDateChange}
                                             value={formData.date}
+                                            minDate={new Date()} 
                                             className="rounded-md shadow w-full mt-1"
                                         />
                                     </div>
