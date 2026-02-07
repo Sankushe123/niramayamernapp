@@ -38,7 +38,7 @@ const Consultation = () => {
     useEffect(() => {
         axios.get('/api/appointments/available-times')
             .then((resp) => {
-                console.log('resp', resp.data)
+                // console.log('resp', resp.data)
                 setUnavailableSlotsByDate(resp.data)
             })
             .catch((err) => {
@@ -96,7 +96,7 @@ const Consultation = () => {
 
     // Handle date change
     const handleDateChange = (date) => {
-        console.log('date', date)
+        // console.log('date', date)
         setFormData({ ...formData, date });
     };
 
@@ -125,7 +125,7 @@ const Consultation = () => {
             ...formData,
             date: formData.date.toISOString(),
         };
-        console.log('appointmentData', appointmentData);
+        // console.log('appointmentData', appointmentData);
 
 
         setLoading(true); // Start loading
@@ -161,7 +161,7 @@ const Consultation = () => {
     // Check if a slot is available
     const isSlotAvailable = (date, time) => {
 
-        console.log('date, time', date, time);
+        // console.log('date, time', date, time);
 
         let dateObj;
 
@@ -201,6 +201,7 @@ const Consultation = () => {
                             <p className="text-sm text-gray-600">
                                 Please fill in your details below, and we'll get in touch with you for an online consultation.
                             </p>
+                            <img src="/images/mission2.png" alt="mission2.png" />
                         </div>
 
                         {/* Right Part: Form */}

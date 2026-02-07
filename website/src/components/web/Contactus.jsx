@@ -34,7 +34,7 @@ export default function Contactus() {
     try {
       const res = await axios.post('/api/user/contact-us', formData);
 
-      console.log('res',res);
+      // console.log('res',res);
       
 
       if (res.status === 200) {

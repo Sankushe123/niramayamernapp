@@ -6,10 +6,10 @@ export const fetchAccessData = createAsyncThunk(
   "access/fetchAccessData",
   async (role, { rejectWithValue }) => {
     try {
-      console.log("🔄 Fetching access data for role:", role);
+      // console.log("🔄 Fetching access data for role:", role);
       const response = await axios.get(`/api/roleaccess/get/${role}`);
 
-      console.log("✅ API Response Data:", response.data); // ✅ Add this log
+      // console.log("✅ API Response Data:", response.data); // ✅ Add this log
 
       return response.data;
     } catch (error) {

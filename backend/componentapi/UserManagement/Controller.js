@@ -12,13 +12,13 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key";
 const otpStore = new Map();
 
 
-exports.createUser =async (req, res) => {
-    try {
+exports.createUser = async (req, res) => {
+  try {
     const { email, password, ...rest } = req.body;
 
 
-    console.log("req.body;",req.body);
-    
+    // console.log("req.body;", req.body);
+
 
     // Check if user exists
     const existingUser = await User.findOne({ email });
@@ -26,7 +26,7 @@ exports.createUser =async (req, res) => {
     if (existingUser) return res.status(400).json({ message: 'Email already exists' });
 
     // Hash password
-    
+
     // const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -66,27 +66,63 @@ exports.getOneUser = async (req, res) => {
   }
 };
 
+// exports.getEditUser = async (req, res) => {
+//   try {
+//     const { password, ...rest } = req.body;
+
+//     log("req.body", req.body);
+
+//     let updatedData = { ...rest };
+
+//     // If password is provided, hash it
+//     // if (password) {
+//     //   updatedData.password = await bcrypt.hash(password, 10);
+//     // }
+
+//     const updatedUser = await User.findByIdAndUpdate(req.params.id, updatedData, { new: true }).select('-password');
+
+//     if (!updatedUser) return res.status(404).json({ message: 'User not found' });
+
+//     res.json({ message: 'User updated successfully', user: updatedUser });
+//   } catch (error) {
+//     console.error('Update User Error:', error);
+//     res.status(500).json({ message: 'Server error', error });
+//   }
+// };
+
 exports.getEditUser = async (req, res) => {
   try {
     const { password, ...rest } = req.body;
 
+    // console.log("req.body", req.body);
+
     let updatedData = { ...rest };
 
-    // If password is provided, hash it
+    // ✅ If hashed password is provided, update it
     if (password) {
-      updatedData.password = await bcrypt.hash(password, 10);
+      updatedData.password = password;
     }
 
-    const updatedUser = await User.findByIdAndUpdate(req.params.id, updatedData, { new: true }).select('-password');
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      updatedData,
+      { new: true }
+    ).select("-password");
 
-    if (!updatedUser) return res.status(404).json({ message: 'User not found' });
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    res.json({ message: 'User updated successfully', user: updatedUser });
+    res.json({
+      message: "User updated successfully",
+      user: updatedUser,
+    });
   } catch (error) {
-    console.error('Update User Error:', error);
-    res.status(500).json({ message: 'Server error', error });
+    console.error("Update User Error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
 
 exports.getDeleteUser = async (req, res) => {
   try {
@@ -115,7 +151,7 @@ exports.register = async (req, res) => {
       return res.status(400).json({ message: "Email already registered" });
     }
 
-    
+
     const user = new User({
       first_name,
       last_name,
@@ -151,7 +187,7 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     // console.log("req.body",req.body);
-    
+
 
     const user = await User.findOne({ email: email });
     if (!user) {
@@ -160,8 +196,8 @@ exports.login = async (req, res) => {
 
     const isMatch = await bcrypt.compare(password, user.password);
 
-    console.log("isMatch",isMatch);
-    
+    console.log("isMatch", isMatch);
+
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
@@ -292,7 +328,7 @@ exports.cantactUs = async (req, res) => {
 
     const result = await sendEmail({ name, email, phone, message });
 
-    console.log("result", result);
+    // console.log("result", result);
 
 
     if (!result.success) {

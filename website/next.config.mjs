@@ -22,6 +22,7 @@ const nextConfig = {
         EMAIL_USER: 'shubhamankushe93@gmail.com',
         EMAIL_PASS: 'wfot rdbw wegn tocx',
         ADMIN_EMAIL: 'sankushe05@gmail.com',
+        // NEXT_PUBLIC_API_BASE_URL: 'https://api.niramayamotherchildcare.com/',
         NEXT_PUBLIC_API_BASE_URL: 'http://localhost:5000',
 
         clinic_Address: 'Ranjan Heights, SB Patil School Rd Ravet, Pimpri-Chinchwad',

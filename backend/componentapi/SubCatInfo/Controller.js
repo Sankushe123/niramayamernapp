@@ -41,7 +41,7 @@ exports.getSingleSubCategoryInfoBySlug = async (req, res) => {
   try {
     const { categorySlug, subcategorySlug } = req.body;
 
-    console.log("req.body",req.body);
+    // console.log("req.body",req.body);
     
     if (!categorySlug || !subcategorySlug) {
       return res.status(400).json({ message: "Missing query parameters" });

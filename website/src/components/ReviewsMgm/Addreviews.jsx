@@ -30,7 +30,7 @@ const AddReview = () => {
     const fetchReview = async () => {
       if (!reviewId) return;
 
-      console.log('reviewId',reviewId);
+      // console.log('reviewId',reviewId);
       
 
       try {

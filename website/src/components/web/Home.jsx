@@ -148,7 +148,7 @@ const Home = () => {
       .get('/api/banner/check-Active')
       .then((resp) => {
 
-        console.log('resp', resp);
+        // console.log('resp', resp);
 
         if (resp.data?.active) {
 
@@ -176,7 +176,7 @@ const Home = () => {
     };
   }, [showAd]);
 
-  console.log('showAd', showAd);
+  // console.log('showAd', showAd);
 
 
   return (

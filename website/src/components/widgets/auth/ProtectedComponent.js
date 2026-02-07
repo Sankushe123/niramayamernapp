@@ -6,7 +6,7 @@ const ProtectedComponent = ({ module, requiredPermission, children }) => {
   // ✅ Find the correct module's permissions
   const modulePermissions = permissions.find((perm) => perm.module === module);
 
-  console.log("📌 Module Permissions:", modulePermissions); // Debugging log
+  // console.log("📌 Module Permissions:", modulePermissions); // Debugging log
 
   // ✅ Check if the required permission exists
   if (

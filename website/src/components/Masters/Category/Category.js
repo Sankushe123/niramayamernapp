@@ -18,7 +18,7 @@ export default function CategoryMaster() {
     try {
       const res = await axios.get('/api/category/get');
       setCategories(res.data);
-      console.log('res.data',res.data);
+      // console.log('res.data',res.data);
       
     } catch (error) {
       Swal.fire('Error!', 'Failed to fetch categories.', 'error');

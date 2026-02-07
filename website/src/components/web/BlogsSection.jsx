@@ -32,6 +32,10 @@ const BlogSection = () => {
   const handleClick = () => {
     router.push("/mother-child-care/blogs");
   };
+
+  const handleReadMore = (slug) => {
+    router.push(`/mother-child-care/blogs/detailed-blog?slug=${slug}`);
+  };
   return (
     <section className="py-12 bg-gray-50 md:px-10 lg:px-18 overflow-hidden">
       <div className="max-w-6xl mx-auto px-6">
@@ -44,7 +48,19 @@ const BlogSection = () => {
               const imageUrl = hasImage
                 ? blog.imagesArray[0]
                 : "/Images/watermark-default.avif";
-              const formattedDate = blog.createdAt;
+
+
+              const formattedDate = blog?.createdAt
+                ? new Date(blog.createdAt).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+                : "";
+
+              // console.log("formattedDate", blog);
+
+
               return (
                 <div
                   key={blog._id}
@@ -77,11 +93,13 @@ const BlogSection = () => {
 
         <div className="hidden md:grid md:grid-cols-3 gap-6">
           {blogs.map((blog) => {
-            const formattedDate = new Date(blog.created_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            });
+            const formattedDate = blog?.createdAt
+              ? new Date(blog.createdAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+              : "";
 
             const hasImage = Array.isArray(blog.imagesArray) && blog.imagesArray.length > 0 && blog.imagesArray[0];
             const imageUrl = hasImage

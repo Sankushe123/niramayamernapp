@@ -75,7 +75,7 @@ const CreateAccess = () => {
 
         try {
             const response = await axios.post('/api/roleaccess/post', accessConfig);
-            console.log('API Response:', response.data);
+            // console.log('API Response:', response.data);
             Swal.fire({
                 icon: 'success',
                 title: 'Access settings saved!',

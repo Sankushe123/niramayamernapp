@@ -26,7 +26,7 @@ export default function SubcategoryInfoList() {
   const fetchList = async () => {
     try {
       const res = await axios.get("/api/subcatinfo/get");
-      console.log(res);
+      // console.log(res);
       
       setInfoList(res.data);
       setFilteredList(res.data);

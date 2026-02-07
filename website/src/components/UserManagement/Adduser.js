@@ -377,6 +377,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import bcrypt from "bcryptjs";
 import { useParams, useRouter } from "next/navigation";
+import ProtectedComponent from "@/components/widgets/auth/ProtectedComponent";
 
 const roles = JSON.parse(process.env.NEXT_PUBLIC_ROLES || "[]");
 
@@ -498,8 +499,8 @@ const Adduser = ({ existingUser = null }) => {
     if (formData.role === "receptionist") {
       if (!formData.aadharNo.trim() || !/^\d{12}$/.test(formData.aadharNo))
         tempErrors.aadharNo = "Aadhaar Number must be 12 digits";
-      if (!formData.aadharImage)
-        tempErrors.aadharImage = "Aadhaar Image is required";
+      // if (!formData.aadharImage)
+      //   tempErrors.aadharImage = "Aadhaar Image is required";
     }
 
     if (formData.pincode && !/^\d{6}$/.test(formData.pincode))
@@ -538,11 +539,11 @@ const Adduser = ({ existingUser = null }) => {
         password: hashedPassword || undefined, // don't send empty password
         role: formData.role,
         aadhar_no: formData.aadharNo,
-        aadhar_image: formData.aadharImage || "",
+        aadhar_image: "",
       };
 
-      console.log("formDataToSend",formDataToSend);
-      
+      console.log("formDataToSend", formDataToSend);
+
 
       if (isEditMode) {
         await axios.put(`/api/user/put/edit-user/${userId}`, formDataToSend);
@@ -796,16 +797,17 @@ const Adduser = ({ existingUser = null }) => {
             </div>
           </>
         )}
-
-        {/* Submit */}
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="px-8 bg-gray-800 text-white py-2 rounded-md hover:bg-gray-500 transition"
-          >
-            {isEditMode ? "Update User" : "Add User"}
-          </button>
-        </div>
+        <ProtectedComponent module="User Management" requiredPermission="can_write">
+          {/* Submit */}
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="px-8 bg-gray-800 text-white py-2 rounded-md hover:bg-gray-500 transition"
+            >
+              {isEditMode ? "Update User" : "Add User"}
+            </button>
+          </div>
+        </ProtectedComponent>
       </form>
     </div>
   );

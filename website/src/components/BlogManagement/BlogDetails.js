@@ -17,14 +17,14 @@ const BlogDetails = () => {
   const [blog, setBlog] = useState(null);
 
 
-  console.log('id', id, params);
+  // console.log('id', id, params);
 
   useEffect(() => {
     if (id) {
       axios
         .get(`/api/blogs/get/${id}`)
         .then((response) => {
-          console.log('response', response);
+          // console.log('response', response);
           setBlog(response.data);
         })
         .catch((error) => {
@@ -60,16 +60,16 @@ const BlogDetails = () => {
   const handleEdit = (blogid) => {
     router.push(`/admin/blog-management/add-blog?id=${blogid}`)
   }
-  
+
   if (!blog) return <p className="text-center">Loading...</p>;
 
   return (
     <div className="container mx-auto p-4">
-      <div className="max-w-5xl mx-auto bg-gray-100 p-4 rounded-lg shadow-md">
+      <div className="max-w-5xl mx-auto bg-gray-100 p-4 rounded-lg shadow-md ">
         {/* Action Buttons */}
-        <div className="flex justify-end gap-2 mb-4">
+        <div className="flex justify-end gap-2 mb-4 ">
           <button
-            className="px-3 py-2 rounded-sm border hover:bg-gray-200 hover:border-gray-400"
+            className="px-3 py-2 rounded-sm border bg-red-300 hover:bg-gray-200 hover:border-gray-400"
             onClick={() => { handleEdit(blog._id) }}
           >
             <TbEdit />
@@ -83,20 +83,24 @@ const BlogDetails = () => {
         </div>
 
         {/* Blog Title */}
-        <h1 className="text-3xl font-bold mb-4">{blog.blogTitle}</h1>
+        <h1 className="text-3xl font-bold mb-4 m-5">{blog.blogTitle}</h1>
 
         {/* Blog Image (if available) */}
         {Array.isArray(blog.imagesArray) && blog.imagesArray.length > 0 && blog.imagesArray[0] && (
           <img
             src={blog.imagesArray[0]}
             alt={blog.blogTitle}
-            className="w-full max-h-[400px] object-cover rounded-lg mb-4"
+            className="w-full max-h-[400px] object-cover rounded-lg mb-4 m-5"
           />
         )}
 
 
         {/* Blog Content */}
-        <div dangerouslySetInnerHTML={{ __html: blog.blogContent }}></div>
+        <div
+          className="m-5"
+          dangerouslySetInnerHTML={{ __html: blog?.blogContent || "" }}
+        />
+
 
       </div>
     </div>

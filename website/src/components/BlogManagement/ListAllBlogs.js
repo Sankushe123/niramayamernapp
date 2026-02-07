@@ -10,7 +10,7 @@ const ListAllBlogs = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get("/api/blogs/get");
-        console.log(response);
+        // console.log(response);
         
         setBlogs(response.data);
       } catch (error) {

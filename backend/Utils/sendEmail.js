@@ -11,7 +11,7 @@ async function sendEmail({ to, subject, html, purpose, userDetails }) {
             },
         });
 
-        console.log("ADMIN_EMAIL", to, subject, html, purpose, userDetails );
+        // console.log("ADMIN_EMAIL", to, subject, html, purpose, userDetails );
         
 
         // Email to User

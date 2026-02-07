@@ -38,7 +38,7 @@ const AppointmentPage = ({ closeModal }) => {
     useEffect(() => {
         axios.get('/api/appointments/available-times')
             .then((resp) => {
-                console.log('resp', resp.data)
+                // console.log('resp', resp.data)
                 setUnavailableSlotsByDate(resp.data)
             })
             .catch((err) => {
@@ -85,7 +85,7 @@ const AppointmentPage = ({ closeModal }) => {
 
     // Handle date change
     const handleDateChange = (date) => {
-        console.log('date', date)
+        // console.log('date', date)
         setFormData({ ...formData, date });
     };
 
@@ -114,7 +114,7 @@ const AppointmentPage = ({ closeModal }) => {
             ...formData,
             date: formData.date.toISOString(),
         };
-        console.log('appointmentData', appointmentData);
+        // console.log('appointmentData', appointmentData);
 
 
         setLoading(true); // Start loading
@@ -190,6 +190,7 @@ const AppointmentPage = ({ closeModal }) => {
                             <p className="text-sm text-gray-600">
                                 Please fill in your details below, and we'll get in touch with you for an online consultation.
                             </p>
+                            <img src="/images/mission1.png" alt="mission1.png" />
                         </div>
 
                         <div className="w-full md:w-2/3 p-2 sm:p-4">

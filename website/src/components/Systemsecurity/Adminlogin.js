@@ -24,7 +24,7 @@ export default function AdminLogin() {
         password,
       });
 
-      console.log('response');
+      // console.log('response');
       
 
       if (response.data?.token && response.data?.user) {

@@ -4,6 +4,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
 import { useRouter } from "next/navigation";
+import ProtectedComponent from "@/components/widgets/auth/ProtectedComponent";
+
 export default function Userlist() {
   const router = useRouter();
 
@@ -34,8 +36,8 @@ export default function Userlist() {
 
   const handleDelete = async (id) => {
 
-    console.log("id",id);
-    
+    // console.log("id", id);
+
     const confirmDelete = await Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -150,20 +152,22 @@ export default function Userlist() {
                       <span className="text-gray-400 text-sm">N/A</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 border text-center space-x-2">
-                    <button
-                      className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1.5 rounded-md text-xs font-medium transition"
-                      onClick={() => handleEdit(user._id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-xs font-medium transition"
-                      onClick={() => handleDelete(user._id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+                  <ProtectedComponent module="User Management" requiredPermission="can_delete">
+                    <td className="px-4 py-3 border text-center space-x-2">
+                      <button
+                        className="bg-yellow-400 hover:bg-yellow-500 text-white px-3 py-1.5 rounded-md text-xs font-medium transition"
+                        onClick={() => handleEdit(user._id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-md text-xs font-medium transition"
+                        onClick={() => handleDelete(user._id)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </ProtectedComponent>
                 </tr>
               ))
             )}

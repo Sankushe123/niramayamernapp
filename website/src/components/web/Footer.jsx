@@ -24,7 +24,7 @@ export default function Footer() {
           <h3 className="text-white font-semibold mb-2">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><Link href="/mother-child-care/about-us" target="_blank" rel="noopener noreferrer" className="hover:text-white">About Us</Link></li>
-            <li><Link href="/mother-child-care/contact-us" target="_blank" rel="noopener noreferrer" className="hover:text-white">Contact Us</Link></li>
+            <li><Link href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="hover:text-white">Contact Us</Link></li>
           </ul>
         </div>
 
@@ -32,10 +32,10 @@ export default function Footer() {
         <div>
           <h3 className="text-white font-semibold mb-2">Services</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link href="/services/pediatric-care" target="_blank" rel="noopener noreferrer" className="hover:text-white">Pediatric Care</Link></li>
-            <li><Link href="/services/women-health" target="_blank" rel="noopener noreferrer" className="hover:text-white">Women’s Health</Link></li>
-            <li><Link href="/services/vaccinations" target="_blank" rel="noopener noreferrer" className="hover:text-white">Vaccinations</Link></li>
-            <li><Link href="/services/online-consultation" target="_blank" rel="noopener noreferrer" className="hover:text-white">Online Consultation</Link></li>
+            <li><Link href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="hover:text-white">Pediatric Care</Link></li>
+            <li><Link href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="hover:text-white">Women’s Health</Link></li>
+            <li><Link href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="hover:text-white">Vaccinations</Link></li>
+            <li><Link href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="hover:text-white">Online Consultation</Link></li>
           </ul>
         </div>
 
@@ -43,16 +43,16 @@ export default function Footer() {
         <div>
           <h3 className="text-white font-semibold mb-2">Connect With Us</h3>
           <div className="flex justify-center md:justify-start gap-6 mt-3 text-xl">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Facebook">
+            <a href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Facebook">
               <FaFacebookF />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Twitter">
+            <a href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Twitter">
               <FaTwitter />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Instagram">
+            <a href="https://www.instagram.com/niramaya_clinic_ravet/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="Instagram">
               <FaInstagram />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="LinkedIn">
+            <a href="/mother-child-care" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white" aria-label="LinkedIn">
               <FaLinkedinIn />
             </a>
           </div>

@@ -16,7 +16,7 @@ const slugify = (text) => {
 const ServicesDropdown = ({ showServices, setShowServices, servicesMenu }) => {
   if (!showServices) return null;
 
-  console.log("servicesMenu", servicesMenu);
+  // console.log("servicesMenu", servicesMenu);
 
   return (
     <div className="mt-2 w-full px-4 sm:px-6 lg:px-8">

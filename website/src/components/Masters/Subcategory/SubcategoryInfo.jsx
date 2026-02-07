@@ -34,7 +34,7 @@ export default function SubcategoryInfo() {
                 .get(`/api/subcatinfo/get/${Infoid}`)
                 .then((res) => {
                     const info = res.data;
-                    console.log("info", info);
+                    // console.log("info", info);
 
                     setTitle(info.subCategoryTitle);
                     setContent(info.subCategoryContent);

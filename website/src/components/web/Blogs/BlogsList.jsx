@@ -83,14 +83,15 @@ const BlogsList = () => {
                         <p className="text-center col-span-full text-gray-500">No blogs found.</p>
                     ) : (
                         filteredBlogs.map((blog) => {
-                            const formattedDate = new Date(blog.created_at).toLocaleDateString(
-                                "en-US",
-                                {
+                            const formattedDate = blog?.createdAt
+                                ? new Date(blog.createdAt).toLocaleDateString("en-US", {
                                     year: "numeric",
                                     month: "long",
                                     day: "numeric",
-                                }
-                            );
+                                })
+                                : "";
+
+
 
                             const imageUrl =
                                 Array.isArray(blog.imagesArray) &&

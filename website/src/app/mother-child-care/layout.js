@@ -8,7 +8,7 @@ import Footer from "@/components/web/Footer";
 import axios from "axios";
 
 axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
-console.log('axios.defaults.baseURL',axios.defaults.baseURL);
+// console.log('axios.defaults.baseURL',axios.defaults.baseURL);
 
 export default function WebsiteLayout({ children }) {
   return (

@@ -26,7 +26,7 @@ const Navbar = () => {
   const fetchCategories = async () => {
     try {
       const res = await axios.get('/api/subcategory/menu');
-      console.log(res);
+      // console.log(res);
       
       setServicesMenu(res.data);
     } catch (error) {
