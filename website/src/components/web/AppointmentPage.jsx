@@ -190,7 +190,7 @@ const AppointmentPage = ({ closeModal }) => {
                             <p className="text-sm text-gray-600">
                                 Please fill in your details below, and we'll get in touch with you for an online consultation.
                             </p>
-                            <img src="/images/mission1.png" alt="mission1.png" />
+                            <img src="/Images/mission1.png" alt="mission1.png" />
                         </div>
 
                         <div className="w-full md:w-2/3 p-2 sm:p-4">

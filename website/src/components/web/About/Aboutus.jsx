@@ -29,7 +29,7 @@ export default function Aboutus() {
       {/* WHO WE ARE */}
       <section className="py-12 px-4 max-w-6xl mx-auto grid md:grid-cols-2 gap-10 items-center">
         <img
-          src="/images/doctorImg.png"
+          src="/Images/doctorImg.png"
           alt="Clinic"
           className="rounded-xl shadow-md w-full max-w-md mx-auto"
         />
@@ -82,7 +82,7 @@ export default function Aboutus() {
           </p>
         </div>
         <img
-          src="/images/missionimage.png"
+          src="/Images/missionimage.png"
           alt="Mission and Vision"
           className=" w-full max-h-80 object-cover"
         />

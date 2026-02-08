@@ -201,7 +201,7 @@ const Consultation = () => {
                             <p className="text-sm text-gray-600">
                                 Please fill in your details below, and we'll get in touch with you for an online consultation.
                             </p>
-                            <img src="/images/mission2.png" alt="mission2.png" />
+                            <img src="/Images/mission2.png" alt="mission2.png" />
                         </div>
 
                         {/* Right Part: Form */}
